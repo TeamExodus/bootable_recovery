@@ -20,6 +20,6 @@ LOCAL_MODULE := libminzip
 
 LOCAL_CLANG := true
 
-LOCAL_CFLAGS += -Werror -Wall
+LOCAL_CFLAGS += -Werror -Wall -ffunction-sections -fdata-sections
 
 include $(BUILD_STATIC_LIBRARY)
