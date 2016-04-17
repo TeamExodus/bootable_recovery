@@ -128,6 +128,14 @@ static int sysMapBlockFile(FILE* mapf, MemMapping* pMap)
              size, blksize, range_count);
         return -1;
     }
+    if (blksize != 0) {
+        blocks = ((size-1) / blksize) + 1;
+    }
+    if (size == 0 || blksize == 0 || blocks > SIZE_MAX / blksize || range_count == 0) {
+        LOGE("invalid data in block map file: size %zu, blksize %u, range_count %u\n",
+             size, blksize, range_count);
+        return -1;
+    }
 
     pMap->range_count = range_count;
     pMap->ranges = calloc(range_count, sizeof(MappedRange));
